@@ -1,17 +1,13 @@
 package dbexam;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 import com.mysql.cj.xdevapi.Result;
 
 public class Ex2 {
   public static void main(String[] args) throws ClassNotFoundException {
-    Class.forName("com.mysql.cj.jdbc.Driver");
+    // Class.forName("com.mysql.cj.jdbc.Driver");
     Properties props = new Properties();
     props.put("user", "root");
     props.put("password", "aA!12345");
