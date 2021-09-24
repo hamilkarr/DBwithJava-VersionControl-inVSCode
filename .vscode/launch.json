@@ -1,0 +1,78 @@
+{
+  // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+  // 기존 특성에 대한 설명을 보려면 가리킵니다.
+  // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Ex7",
+      "request": "launch",
+      "mainClass": "dbexam.Ex7",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea",
+      "args": "12"
+    },
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch App",
+      "request": "launch",
+      "mainClass": "App",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch ClassTest",
+      "request": "launch",
+      "mainClass": "classClassStudy.ClassTest",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch StringClassTest",
+      "request": "launch",
+      "mainClass": "classClassStudy.StringClassTest",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex1",
+      "request": "launch",
+      "mainClass": "dbexam.Ex1",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex2",
+      "request": "launch",
+      "mainClass": "dbexam.Ex2",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex3",
+      "request": "launch",
+      "mainClass": "dbexam.Ex3",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex4",
+      "request": "launch",
+      "mainClass": "dbexam.Ex4",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex5",
+      "request": "launch",
+      "mainClass": "dbexam.Ex5",
+      "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea"
+    }
+  ]
+}

@@ -3,8 +3,6 @@ package dbexam;
 import java.sql.*;
 import java.util.Properties;
 
-import com.mysql.cj.xdevapi.Result;
-
 public class Ex2 {
   public static void main(String[] args) throws ClassNotFoundException {
     // Class.forName("com.mysql.cj.jdbc.Driver");
