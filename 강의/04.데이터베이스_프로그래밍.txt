@@ -1,0 +1,54 @@
+  데이터베이스 연동 자바 프로그래밍
+
+1. mysql 드라이버
+  jdk 설치 경로/lib에 복사 
+  C:\Program Files\Java\jdk-16.0.2\lib\mysql-connector-java-8.0.26.jar
+  
+2. java.sql
+
+3. 드라이버 로드(필요한 클래스) -> 동적 로딩 
+Class.forName("패키지명 + 클래스");
+
+DriverManager 클래스  . getConnection() --> Connection 인스턴스 반환
+
+4. Statement 인터페이스 - 정적 SQL 
+	Connection 인스턴스 -> createStatement() 메서드 Statement 인스턴스 생성 
+	- ResultSet executeQuery(String sql)  - SELECT 
+	- int executeUpdate(String sql) - INSERT, UPDATE, DELETE
+	- 실행 1번만 가능(일회용 SQL)
+	- 리소스 -> 반드시 사용 후 닫아 줘야 한다
+	- ResultSet -> SELECT 형태로 투플을 반환하면 처리하는 클래스
+	   - next();
+	   - get자료형(컬럼 순서번호 OR 컬럼명);
+	
+5. PreparedStatement 인터페이스 - 동적 SQL 
+	PreparedStatement 인스턴스 생성 방법 
+	Connection 인스턴스 -> prepareStatement(String sql)
+	
+	- ResultSet executeQuery(); - SELECT 
+	- int executeUpdate(); - INSERT, UPDATE, DELETE 
+	  (int 반환값 -> 반영된 투플의 갯수) 	
+		
+	- preparedSatement - 데이터 바인딩
+	- set자료형(바인딩 순서(1부터 시작), 바인딩할 값);
+	
+6. CallableStatement 인터페이스 - 프로시저 호출
+
+P269 
+저장프로그램 - 사용자 정의 함수
+1. 프로시저(Procedure) 
+CREATE PROCEDURE 함수명( ... 인수 )
+BEGIN 
+// 실행되는 영역 
+END;
+
+CALL 함수명; 
+
+P270 -> 숫자 투입 하면 -> 0 부터 증감 -> 인수보다 커질때까지 증감 
+변수 @변수 -> 전역변수 
+
+
+2. 트리거 (Trigger) 
+SQL 실행 전, 후
+
+3. 사용자 정의 함수

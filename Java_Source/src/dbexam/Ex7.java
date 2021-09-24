@@ -3,6 +3,8 @@ package dbexam;
 import java.sql.*;
 import java.util.Properties;
 
+// lounch.json  <- args 11 입력함.
+
 public class Ex7 {
 
 	public static void main(String[] args) throws ClassNotFoundException {
