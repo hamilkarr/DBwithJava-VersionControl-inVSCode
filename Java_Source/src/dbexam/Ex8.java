@@ -14,20 +14,19 @@ public class Ex8 {
     String url = "jdbc:mysql://localhost:3306/madang";
     String user = "root";
     String password = "aA!12345";
-    String sql = "CALL Insert_book(?,?,?,?)";
 
+    String sql = "CALL InsertBook(?, ?, ?, ?)";
     try (Connection conn = DriverManager.getConnection(url, user, password);
-        CollableStatement cstmt = conn.prepareCall(sql);) {
+        CallableStatement cstmt = conn.prepareCall(sql)) {
       cstmt.setInt(1, Integer.parseInt(args[0]));
       cstmt.setString(2, args[1]);
       cstmt.setString(3, args[2]);
       cstmt.setInt(4, Integer.parseInt(args[3]));
       int rs = cstmt.executeUpdate();
-      System.out.println("affected rows: " + rs);
-
+      System.out.println("affected rows : " + rs);
     } catch (SQLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
   }
 }
