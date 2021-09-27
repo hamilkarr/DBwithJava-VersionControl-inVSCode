@@ -33,6 +33,7 @@ DriverManager 클래스  . getConnection() --> Connection 인스턴스 반환
 	- set자료형(바인딩 순서(1부터 시작), 바인딩할 값);
 	
 6. CallableStatement 인터페이스 - 프로시저 호출
+	
 
 P269 
 저장프로그램 - 사용자 정의 함수
@@ -47,8 +48,260 @@ CALL 함수명;
 P270 -> 숫자 투입 하면 -> 0 부터 증감 -> 인수보다 커질때까지 증감 
 변수 @변수 -> 전역변수 
 
+P271 -> Book 테이블에 투풀을 삽입하는 프로시저
+In 변수명 : 입력되는 값
+Out 변수명 : 반환 값
+
+delimiter **
+create procedure InsertBook (
+	myBookID Integer,
+    myBookName varchar(40),
+    myPublisher varchar(40),
+    myPrice Integer
+    )
+begin
+	insert into Book
+    values(myBookID, myBookName,myPublisher,myPrice);
+end;
+**
+
+call InsertBook(11,"책2","출판사2",25000);
+
+create table Member(
+	memNo Integer auto_increment,
+    memID varchar(40) not null,
+    memPw varchar(65) not null,
+    memNm varchar(20) not null,
+    regDt datetime default now(),
+    unique (memID),
+    primary key(memNo)
+);
+
+delimiter **
+create procedure insertMember(
+	in myMemID varchar(20),
+    in myMemPw varchar(65),
+    in myMemNm varchar(20)
+)
+begin
+	insert into member (memID,memPw,memNm)
+    values (myMemID, myMemPw, myMemNm);
+end;
+**
+
+call madang.insertMember("admin", "1234", "관리자");
+
+P273
+		Delimiter [문자]
+		....
+		[문자]
+		Begin
+		함수 실행 영역
+		End;
+
+		If <조건> Then [구현부분 ...]
+		Else [구현부분 ...]
+		End If;
+
+		delimiter **
+		create procedure checkEvenOrOdd(
+			in num Integer,
+				out result varchar(10)
+				)
+		begin
+			If num %  2 = 0 then set result = "짝수";
+				else set result = "홀수";
+				end if;
+		end;
+		**
+
+		set @result = '0';
+		call madang.checkEvenOrOdd(77, @result);
+		select @result;
+
+P276 - Book 테이블에 저장된 도서의 평균 가격
+
+	delimiter **
+	create procedure AveragePrice(
+		out AverageVal Integer)
+	Begin
+		select avg(price) into AverageVal
+			from book where price is not null;
+	end;
+	**
+
+	call madang.AveragePrice(@value);
+	select @value;
+
+	delimiter **
+	create procedure multiply(
+		in num1 integer,
+			in num2 integer,
+			out result integer
+	)
+	begin 
+		set result = num1 + num2;
+	end;
+	**
+
+	set @result = 0;
+	call madang.multiply(10, 20, @result);
+	select @result;
+
+	[label:]Loop
+	실행영역
+	[Leave [label:]]
+	end Loop;
+			
+			delimiter **
+			create procedure sumRecursive2(
+				in num integer,
+					out result integer )
+			begin
+				declare addNum integer default 1;
+					set result = 0;
+					loop1: loop
+				if addNum > num then leave loop1;
+					end if;
+					set result = result + addNum;
+					set addNum = addNum + 1;
+					
+					end loop loop1;
+			end;
+			**
+
+	While <조건> Do
+		반복되는 구간
+		[Break-반복중단 | Continue-건너뛰기 ]
+	End While;
+
+	Repeat 실행 영역 Until 조건(참)-> 정지 End Repeat;
+	Return
+
+	커서를 사용하는 프로시저 P277
+		Cursor 커서 이름 Cursor For
+		
+		Open 커서 이름;
+		Close 커서 이름;
+		Fetch 커서 이름 Into 변수
+
+		Delimiter **
+		Create Procedure Interest(
+		out myInterest Float)
+		Begin 
+			declare price Integer;
+				declare endOfRow boolean default false;
+				declare InterestCursor Cursor for
+				select saleprice from orders;
+			declare continue handler
+				for not found set endofrow=true;
+						set myInterest = 0.0;
+			open Interestcursor;
+						loop1 :loop
+					fetch interestcursor into price;
+					if endofRow then leave loop1;
+					end if;
+					
+					if price >= 30000 then set myinterest = myinterest + price * 0.1;
+					else set myinterest = myinterest + price * 0.05;
+					end if;
+				end loop loop1;
+				close interestcursor;
+		End;
+		**
 
 2. 트리거 (Trigger) 
 SQL 실행 전, 후
+	(Insert, Delete, Update) - 데이터의 변경이 발생하는 전 후에 처리되는 부분
+
+	Before (실행전)
+	Instead of 정의된 SQL 대신
+	After (실행 후)
+
+	P279
+		CREATE TABLE Book_log (
+				bookid_l INTEGER,
+				bookname_l VARCHAR(40),
+				publisher_l VARCHAR(40),
+				price_l INTEGER
+		);
+
+		delimiter **
+		CREATE 
+				TRIGGER  afterInsertBook
+		AFTER INSERT ON book FOR EACH ROW 
+				BEGIN 
+				insert into book_log
+						value ( new.bookid, new.bookname, new.publisher, new.price);
+				END;
+		**
+
+		show triggers; << 추가된 트리거 확인용
+
+		insert into book
+		values (14,"책3","출판사3",25000);
+
 
 3. 사용자 정의 함수
+	SQL 구문 안에서 사용할 수 있는 함수
+	create function 함수명(....) Return 반환값 타입
+
+	Begin 
+	.....
+	return 반환값;
+	end;
+
+	권한 부여
+	root를 통해서 권한 부여
+	Set global log_bin_trust_function_creators=ON;
+
+	p281 - 판매된 도서에 대한 이익을 계산하는 함수
+
+		delimiter **
+		create function fnc_Interest(
+			price integer
+		) returns integer
+		begin
+			declare myInterest Integer default 0;
+				if price >= 30000 then set myInterest = price * 0.1;
+				else set myInterest = price * 0.05;
+				end if;
+				return myInterest;
+		end;
+		**
+
+		SELECT 
+				custid, orderid, saleprice, FNC_INTEREST(saleprice) Interest
+		FROM
+				orders;
+
+		delimiter **
+		create function myConcat(
+			s1 varchar(40),
+				s2 varchar(40)
+		) returns varchar(80)
+		begin
+			declare result varchar(80);
+				set result = concat(s1,s2);
+				return result;
+		end; **
+
+		select madang.myConcat('안녕', '하이');
+
+	p282 - 표5-4
+
+	프로시저
+	CREATE PROCEDURE
+	CALL 프로시저명
+
+	트리거
+	CREATE TRIGGER
+	INSERT,DELETE,UPDATE 문이 실행 될때 (BEFORE, AFTER, INSTEAD OF)
+
+	사용자 정의 함수
+	CREATE FUNCTION
+	SELECT 구문에서
+
+	DROP PROCEDURE 프로시저명
+	DROP TRIGGER 트리거명
+	DROP FUNCTION 함수명

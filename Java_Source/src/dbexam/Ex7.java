@@ -3,7 +3,7 @@ package dbexam;
 import java.sql.*;
 import java.util.Properties;
 
-// lounch.json  <- args 11 입력함.
+// lounch.json  <- "args": "12" 
 
 public class Ex7 {
 

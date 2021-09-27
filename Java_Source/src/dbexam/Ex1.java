@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Ex1 {
   public static void main(String[] args) throws ClassNotFoundException {
-    // Class.forName("com.mysql.cj.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     // 윗줄 주석처리 해도 실행은 잘됨. 이유는??
     String user = "root";
     String password = "aA!12345";

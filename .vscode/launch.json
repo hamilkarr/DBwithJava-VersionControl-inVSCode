@@ -9,6 +9,42 @@
       "name": "Launch Ex7",
       "request": "launch",
       "mainClass": "dbexam.Ex7",
+      "projectName": "Java_Source",
+      "args": "12"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex3",
+      "request": "launch",
+      "mainClass": "dbexam.Ex3",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex4",
+      "request": "launch",
+      "mainClass": "dbexam.Ex4",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex6",
+      "request": "launch",
+      "mainClass": "dbexam.Ex6",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex5",
+      "request": "launch",
+      "mainClass": "dbexam.Ex5",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex7",
+      "request": "launch",
+      "mainClass": "dbexam.Ex7",
       "projectName": "DBwithJava-VersionControl-inVSCode_24afa9ea",
       "args": "12"
     },
