@@ -6,6 +6,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Ex4",
+      "request": "launch",
+      "mainClass": "dbexam2.Ex4",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex3",
+      "request": "launch",
+      "mainClass": "dbexam2.Ex3",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex2",
+      "request": "launch",
+      "mainClass": "dbexam2.Ex2",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex1",
+      "request": "launch",
+      "mainClass": "dbexam2.Ex1",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"
