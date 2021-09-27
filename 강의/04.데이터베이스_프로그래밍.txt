@@ -91,7 +91,7 @@ end;
 
 call madang.insertMember("admin", "1234", "관리자");
 
-P273
+P273 제어문을 사용하는 프로시저
 		Delimiter [문자]
 		....
 		[문자]
@@ -119,6 +119,36 @@ P273
 		call madang.checkEvenOrOdd(77, @result);
 		select @result;
 
+p274
+
+/* 동일한 도서가 있는지 점검한후 삽입하는 프로시저 */
+/* 이미 동일 도서가 있으면 가격만 업데이트 */
+
+		delimiter **
+		Create procedure BookInsertOrUpdate(
+			myBookID integer,
+				myBookName varchar(40),
+				myPublisher varchar(40),
+				myPrice Integer)
+		Begin
+			declare mycount Integer;
+		SELECT 
+				COUNT(*)
+		INTO mycount FROM
+				Book
+		WHERE
+				bookname LIKE myBookName;
+		If mycount !=0 then
+				update book set price = myprice
+				where bookname like myBookName;
+		Else
+			insert into book
+				values(myBookID,myBookName,myPublisher,myPrice);
+		End if;
+		End; **
+    
+
+결과를 반환하는 프로시저
 P276 - Book 테이블에 저장된 도서의 평균 가격
 
 	delimiter **
@@ -132,6 +162,7 @@ P276 - Book 테이블에 저장된 도서의 평균 가격
 
 	call madang.AveragePrice(@value);
 	select @value;
+
 
 	delimiter **
 	create procedure multiply(
@@ -218,6 +249,10 @@ SQL 실행 전, 후
 	Instead of 정의된 SQL 대신
 	After (실행 후)
 
+	트리거 사용전에 root계정에서 설정변경 필요.
+	커맨드창에서
+	SET global log_bin_trust_function_creators
+
 	P279
 		CREATE TABLE Book_log (
 				bookid_l INTEGER,
@@ -251,10 +286,6 @@ SQL 실행 전, 후
 	return 반환값;
 	end;
 
-	권한 부여
-	root를 통해서 권한 부여
-	Set global log_bin_trust_function_creators=ON;
-
 	p281 - 판매된 도서에 대한 이익을 계산하는 함수
 
 		delimiter **
@@ -270,6 +301,7 @@ SQL 실행 전, 후
 		end;
 		**
 
+	Orders 테이블에서 각 주문에 대한 이익금을 출력
 		SELECT 
 				custid, orderid, saleprice, FNC_INTEREST(saleprice) Interest
 		FROM

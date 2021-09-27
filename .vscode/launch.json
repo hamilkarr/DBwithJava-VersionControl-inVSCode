@@ -79,7 +79,7 @@
       "request": "launch",
       "mainClass": "dbexam.Ex8",
       "projectName": "Java_Source",
-      "args": "12"
+      "args": "15 책책 출판출판 10000"
     }
   ]
 }
