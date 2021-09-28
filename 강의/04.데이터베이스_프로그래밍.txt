@@ -337,3 +337,16 @@ SQL 실행 전, 후
 	DROP PROCEDURE 프로시저명
 	DROP TRIGGER 트리거명
 	DROP FUNCTION 함수명
+
+09-28 1교시
+
+	delimiter **
+	create procedure DeleteBook(
+		bookId  integer    
+	)
+	begin
+		delete from book where bookid = bookId;
+	end; **
+
+	call madang.InsertBook2(11, '책5', '출판사5', 15000);
+	call madang.DeleteBook(11);

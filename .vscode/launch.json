@@ -6,6 +6,36 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Member2",
+      "request": "launch",
+      "mainClass": "dbTest.Member2",
+      "projectName": "Java_Source",
+      "args": "3"
+    },
+    {
+      "type": "java",
+      "name": "Launch Member",
+      "request": "launch",
+      "mainClass": "dbTest.Member",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex1",
+      "request": "launch",
+      "mainClass": "dateExam.Ex1",
+      "projectName": "Java_Source"
+    },
+    {
+      "type": "java",
+      "name": "Launch Ex10",
+      "request": "launch",
+      "mainClass": "dbexam.Ex10",
+      "projectName": "Java_Source",
+      "args": "13 책책책 출판사사사 10000"
+    },
+    {
+      "type": "java",
       "name": "Launch Ex4",
       "request": "launch",
       "mainClass": "dbexam2.Ex4",
